@@ -9,6 +9,9 @@ import 'repository.dart';
 class NewsDbProvider implements Source, Cache {
   Database db;
 
+  NewsDbProvider() {
+    init();
+  }
   void init() async {
     Directory documentDirectory = await getApplicationDocumentsDirectory();
     final path = join(documentDirectory.path, "items.db");
@@ -62,3 +65,5 @@ class NewsDbProvider implements Source, Cache {
     return db.insert("Items", itemModel.toMapForDb());
   }
 }
+
+final newsDbProvider = NewsDbProvider();
