@@ -1,21 +1,22 @@
 import 'news_api_provider.dart';
 import 'news_db_provider.dart';
 import '../models/item_model.dart';
+import 'dart:async';
 
 class Repository {
   NewsApiProvider apiProvider = NewsApiProvider();
   NewsDbProvider dbProvider = NewsDbProvider();
-  fetchTopIds() {
+  Future<List<int>> fetchTopIds() {
     return apiProvider.fetchTopIds();
   }
 
-  fetchItem(int id) async {
+  Future<ItemModel> fetchItem(int id) async {
     var item = await dbProvider.fetchItem(id);
     if (item != null) {
       return item;
     }
 
-    item = apiProvider.fetchItem(id);
+    item = await apiProvider.fetchItem(id);
     dbProvider.addItem(item);
     return item;
   }
