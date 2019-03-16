@@ -29,7 +29,9 @@ class NewsList extends StatelessWidget {
           return ListView.builder(
               itemCount: snapshot.data.length,
               itemBuilder: (context, index) {
-                return NewsListTile(snapshot.data[index]);
+                final itemId = snapshot.data[index];
+                bloc.fetchItem(itemId);
+                return NewsListTile(itemId);
                 //return Text("${snapshot.data[index]}");
               });
         }
