@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../blocs/stories_provider.dart';
+import '../widgets/news_list_tile.dart';
 
 class NewsList extends StatelessWidget {
   @override
@@ -21,12 +22,15 @@ class NewsList extends StatelessWidget {
       stream: bloc.topIds,
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
-          return Text("Still waiting data");
+          return Center(
+            child: CircularProgressIndicator(),
+          );
         } else {
           return ListView.builder(
               itemCount: snapshot.data.length,
               itemBuilder: (context, index) {
-                return Text("${snapshot.data[index]}");
+                return NewsListTile(snapshot.data[index]);
+                //return Text("${snapshot.data[index]}");
               });
         }
       },

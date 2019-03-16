@@ -16,7 +16,10 @@ class Repository {
   //Iterate over sources when dbProvider
   //get fetchToIds implemeneted.
   Future<List<int>> fetchTopIds() {
-    return sources[1].fetchTopIds();
+    final topIds = sources[1].fetchTopIds();
+    print("$topIds");
+
+    return topIds;
   }
 
   Future<ItemModel> fetchItem(int id) async {
@@ -30,9 +33,9 @@ class Repository {
     }
 
     for (Cache cache in caches) {
-      cache.addItem(itemModel);
+      await cache.addItem(itemModel);
     }
-
+    //print("${itemModel.title}");
     return itemModel;
   }
 }
