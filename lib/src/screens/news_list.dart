@@ -32,7 +32,6 @@ class NewsList extends StatelessWidget {
                 final itemId = snapshot.data[index];
                 bloc.fetchItem(itemId);
                 return NewsListTile(itemId);
-                //return Text("${snapshot.data[index]}");
               });
         }
       },
