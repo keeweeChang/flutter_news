@@ -6,9 +6,10 @@ import 'dart:async';
 import '../models/item_model.dart';
 import 'repository.dart';
 
+const itemsTableName = "Items";
+
 class NewsDbProvider implements Source, Cache {
   Database db;
-
   NewsDbProvider() {
     init();
   }
@@ -20,7 +21,7 @@ class NewsDbProvider implements Source, Cache {
       version: 1,
       onCreate: (newDb, version) {
         newDb.execute("""
-          CREATE TABLE Items
+          CREATE TABLE $itemsTableName
             (
               id INTEGER PRIMARY KEY,
               type TEXT,
@@ -65,7 +66,7 @@ class NewsDbProvider implements Source, Cache {
     try {
       //return fakeAdd();
       return db.insert(
-        "Items",
+        itemsTableName,
         itemModel.toMapForDb(),
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
@@ -77,6 +78,10 @@ class NewsDbProvider implements Source, Cache {
 
   Future<int> fakeAdd() async {
     return 1;
+  }
+
+  Future<int> clear() {
+    return db.delete(itemsTableName);
   }
 }
 

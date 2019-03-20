@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../blocs/stories_provider.dart';
 import '../widgets/news_list_tile.dart';
+import '../widgets/refresh.dart';
 
 class NewsList extends StatelessWidget {
   @override
@@ -26,13 +27,16 @@ class NewsList extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
         } else {
-          return ListView.builder(
+          return Refresh(
+            child: ListView.builder(
               itemCount: snapshot.data.length,
               itemBuilder: (context, index) {
                 final itemId = snapshot.data[index];
                 bloc.fetchItem(itemId);
                 return NewsListTile(itemId);
-              });
+              },
+            ),
+          );
         }
       },
     );

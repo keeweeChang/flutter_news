@@ -59,7 +59,7 @@ class ItemModel {
       "url": url,
       "score": score,
       "title": title,
-      "descendants": descendants ?? [],
+      "descendants": descendants ?? 0,
     };
   }
 }
