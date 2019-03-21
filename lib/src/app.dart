@@ -5,10 +5,16 @@ import 'blocs/stories_provider.dart';
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "News",
-      home: StoriesProvider(
-        child: NewsList(),
+    return StoriesProvider(
+      child: MaterialApp(
+        title: "News",
+        onGenerateRoute: (routeSettings) {
+          return MaterialPageRoute(
+            builder: (context) {
+              return NewsList();
+            },
+          );
+        },
       ),
     );
   }

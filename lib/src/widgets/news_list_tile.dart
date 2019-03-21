@@ -24,10 +24,10 @@ class NewsListTile extends StatelessWidget {
             return FutureBuilder(
               future: snapshot.data[itemId],
               builder: (context, AsyncSnapshot<ItemModel> itemSnapshot) {
-                  if (!itemSnapshot.hasData) {
-                    return LoadingContainer();
-                  }
-                  return buildTile(itemSnapshot.data);
+                if (!itemSnapshot.hasData) {
+                  return LoadingContainer();
+                }
+                return buildTile(itemSnapshot.data);
               },
             );
           }
@@ -52,6 +52,9 @@ class NewsListTile extends StatelessWidget {
               Text("${itemModel.descendants}"),
             ],
           ),
+          onTap: () {
+            print("click item: ${itemModel.id}");
+          },
         ),
         Divider(
           height: 8.0,
