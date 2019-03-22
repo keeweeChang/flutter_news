@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'screens/news_list.dart';
 import 'blocs/stories_provider.dart';
+import 'screens/news_detail.dart';
 
 class App extends StatelessWidget {
   @override
@@ -9,11 +10,17 @@ class App extends StatelessWidget {
       child: MaterialApp(
         title: "News",
         onGenerateRoute: (routeSettings) {
-          return MaterialPageRoute(
-            builder: (context) {
-              return NewsList();
-            },
-          );
+          if (routeSettings.name == "/") {
+            return MaterialPageRoute(
+              builder: (context) {
+                return NewsList();
+              },
+            );
+          } else {
+            return MaterialPageRoute(builder: (context) {
+              return NewsDetail();
+            });
+          }
         },
       ),
     );
