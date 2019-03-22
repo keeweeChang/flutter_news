@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../blocs/stories_provider.dart';
 
 class Refresh extends StatelessWidget {
-  Widget child;
+  final Widget child;
   Refresh({this.child});
 
   @override
