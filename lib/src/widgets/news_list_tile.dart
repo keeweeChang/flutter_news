@@ -14,28 +14,25 @@ class NewsListTile extends StatelessWidget {
     return StreamBuilder(
       stream: bloc.items,
       builder: (context, AsyncSnapshot<Map<int, Future<ItemModel>>> snapshot) {
-        try {
-          if (!snapshot.hasData) {
-            return LoadingContainer();
-          } else if (snapshot.data[itemId] == null) {
-            print("snapshot.data is null, itemId: $itemId");
-            return LoadingContainer();
-          } else {
-            return FutureBuilder(
-              future: snapshot.data[itemId],
-              builder: (context, AsyncSnapshot<ItemModel> itemSnapshot) {
-                if (!itemSnapshot.hasData) {
-                  return LoadingContainer();
-                }
-                return buildTile(context, itemSnapshot.data);
-              },
-            );
-          }
-        } catch (e) {
-          print("error itemId: $itemId");
-          print(e.toString());
+        return Container(
+          height: 80,
+          child: buildItem(context, snapshot),
+        );
+      },
+    );
+  }
+
+  Widget buildItem(context, AsyncSnapshot<Map<int, Future<ItemModel>>> snapshot) {
+    if (!snapshot.hasData) {
+      return LoadingContainer();
+    }
+    return FutureBuilder(
+      future: snapshot.data[itemId],
+      builder: (context, AsyncSnapshot<ItemModel> itemSnapshot) {
+        if (!itemSnapshot.hasData) {
           return LoadingContainer();
         }
+        return buildTile(context, itemSnapshot.data);
       },
     );
   }

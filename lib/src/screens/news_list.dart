@@ -30,6 +30,7 @@ class NewsList extends StatelessWidget {
           return Refresh(
             child: ListView.builder(
               itemCount: snapshot.data.length,
+              itemExtent: 80.0,
               itemBuilder: (context, index) {
                 final itemId = snapshot.data[index];
                 bloc.fetchItem(itemId);
