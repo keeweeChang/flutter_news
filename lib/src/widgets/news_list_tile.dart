@@ -6,23 +6,26 @@ import 'loading_container.dart';
 
 class NewsListTile extends StatelessWidget {
   final int itemId;
+  final int index;
 
-  NewsListTile(this.itemId);
+  NewsListTile(this.itemId, this.index);
   @override
   Widget build(BuildContext context) {
     final bloc = StoriesProvider.of(context);
     return StreamBuilder(
       stream: bloc.items,
       builder: (context, AsyncSnapshot<Map<int, Future<ItemModel>>> snapshot) {
+        final widget = buildItem(context, snapshot);
         return Container(
           height: 80,
-          child: buildItem(context, snapshot),
+          child: widget,
         );
       },
     );
   }
 
-  Widget buildItem(context, AsyncSnapshot<Map<int, Future<ItemModel>>> snapshot) {
+  Widget buildItem(BuildContext context,
+      AsyncSnapshot<Map<int, Future<ItemModel>>> snapshot) {
     if (!snapshot.hasData) {
       return LoadingContainer();
     }
