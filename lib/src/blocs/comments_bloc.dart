@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:rxdart/rxdart.dart';
 import '../models/item_model.dart';
 import '../resources/repository.dart';
-
+import 'package:flutter/material.dart';
 class CommentsBloc {
   final _repository = Repository();
   final _commentsFetcher = PublishSubject<int>();
@@ -19,6 +19,7 @@ class CommentsBloc {
   _scanTransformer() {
     return ScanStreamTransformer<int, Map<int, Future<ItemModel>>>(
       (cache, id, count) {
+        print(count);
         cache[id] = _repository.fetchItem(id);
         cache[id].then((item) {
           item.kids.forEach((kidId) => fetchItemWithComments(kidId));
