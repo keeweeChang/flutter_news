@@ -3,6 +3,6 @@ import 'src/app.dart';
 import 'package:flutter/rendering.dart';
 
 void main() {
-  debugPaintSizeEnabled = true;
+  //debugPaintSizeEnabled = true;
   runApp(App());
 }

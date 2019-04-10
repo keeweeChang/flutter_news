@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../blocs/comments_provider.dart';
 import '../models/item_model.dart';
 import 'dart:async';
+import '../widgets/comment.dart';
 
 class NewsDetail extends StatelessWidget {
   final int itemId;
@@ -32,9 +33,9 @@ class NewsDetail extends StatelessWidget {
           future: itemFuture,
           builder:
               (BuildContext context, AsyncSnapshot<ItemModel> itemSnapshot) {
-                if(!itemSnapshot.hasData) {
-                  return Text("loading");
-                }
+            if (!itemSnapshot.hasData) {
+              return Text("loading");
+            }
             return _buildList(itemSnapshot.data, snapshot.data);
           },
         );
@@ -43,10 +44,15 @@ class NewsDetail extends StatelessWidget {
   }
 
   Widget _buildList(ItemModel item, Map<int, Future<ItemModel>> itemMap) {
+    final children = <Widget>[];
+    children.add(_buildTitle(item));
+    final commentsList = item.kids.map((kidsId) {
+      return Comment(itemId: kidsId, itemMap: itemMap);
+    }).toList();
+    children.addAll(commentsList);
+
     return ListView(
-      children: <Widget>[
-        _buildTitle(item),
-      ],
+      children: children,
     );
   }
 
