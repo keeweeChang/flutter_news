@@ -16,10 +16,7 @@ class NewsListTile extends StatelessWidget {
       stream: bloc.items,
       builder: (context, AsyncSnapshot<Map<int, Future<ItemModel>>> snapshot) {
         final widget = buildItem(context, snapshot);
-        return Container(
-          height: 80,
-          child: widget,
-        );
+        return widget;
       },
     );
   }

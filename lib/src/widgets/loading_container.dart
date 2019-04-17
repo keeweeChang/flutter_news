@@ -16,10 +16,10 @@ class LoadingContainer extends StatelessWidget {
 
   Widget buildContainer() {
     return Container(
-      width: 140.0,
-      height: 10.0,
+      width: 150.0,
+      height: 24.0,
       color: Colors.grey[300],
-      margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
+      margin: EdgeInsets.only(top: 5.0, bottom: 5.0),
     );
   }
 }
